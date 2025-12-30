@@ -202,7 +202,7 @@ export default function ConsultationModal({ isOpen, showFormview, onClosemodal }
                       className="flex items-center gap-6 pt-6 border-t border-emerald/20"
                     >
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-emerald mb-1">500+</div>
+                        <div className="text-2xl font-bold text-emerald mb-1">1989+</div>
                         <div className="text-xs text-offwhite/60">Happy Clients</div>
                       </div>
                       <div className="text-center">
@@ -274,7 +274,7 @@ export default function ConsultationModal({ isOpen, showFormview, onClosemodal }
                             value={formData.email}
                             onChange={handleChange}
                             required
-                            placeholder="[email protected]"
+                            placeholder="abc@example.com"
                             className="w-full px-4 py-3 bg-transparent/50 border border-emerald/20 rounded-lg text-offwhite placeholder:text-offwhite/40 focus:outline-none focus:border-emerald/60 focus:ring-2 focus:ring-emerald/20 transition-all"
                           />
                         </motion.div>
@@ -524,7 +524,7 @@ export default function ConsultationModal({ isOpen, showFormview, onClosemodal }
                               value={formData.email}
                               onChange={handleChange}
                               required
-                              placeholder="[email protected]"
+                              placeholder="abc@example.com"
                               className="w-full px-4 py-2.5 bg-transparent/50 border border-emerald/20 rounded-lg text-offwhite placeholder:text-offwhite/40 focus:outline-none focus:border-emerald/60 focus:ring-2 focus:ring-emerald/20 transition-all text-sm"
                             />
                           </div>

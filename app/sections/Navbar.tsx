@@ -48,7 +48,7 @@ export default function Navbar() {
                                 <img  className='object-fit' src='/logo.svg'/>
                             </div>
                             <span className="font-serif text-xl font-bold text-offwhite">
-                                S & R <span className="text-emerald">Associates</span>
+                                S R & <span className="text-emerald">Associates</span>
                             </span>
                             
                         </motion.div>

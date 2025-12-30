@@ -106,7 +106,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald/30 bg-emerald/5 mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald/30 bg-emerald/5"
             >
               <Sparkles size={16} className="text-emerald" />
               <span className="text-xs sm:text-sm text-emerald font-medium">
@@ -141,8 +141,9 @@ export function Hero() {
               transition={{ delay: 0.5 }}
               className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-8 lg:mb-12"
             >
-              <Button variant="primary">Book Free Consultation</Button>
-              <Button variant="secondary">View Services</Button>
+              <Button variant="primary" onClick={() => window.open('https://wa.me/+919650462399?text=Hi%2C%20I%20would%20like%20to%20book%20a%20free%20consultation%20for%20tax%20and%20GST%20services.', '_blank')}>
+                Book Free Consultation
+              </Button>
             </motion.div>
 
             <motion.div
@@ -152,7 +153,7 @@ export function Hero() {
               className="grid grid-cols-3 gap-4 sm:gap-8"
             >
               <div className="text-center lg:text-left">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-emerald mb-1">500+</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-emerald mb-1">1989+</div>
                 <div className="text-xs sm:text-sm text-offwhite/60">Clients</div>
               </div>
               <div className="text-center lg:text-left">

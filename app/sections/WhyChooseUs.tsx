@@ -6,7 +6,7 @@ import { Target, Lock, Award, Clock } from 'lucide-react';
 const highlights = [
   {
     icon: Target,
-    title: '99.8% Accuracy',
+    title: '100% Accuracy',
     description: 'Precision-driven tax filing with meticulous attention to detail and compliance.',
   },
   {

@@ -13,7 +13,7 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="font-serif text-2xl font-bold text-emerald mb-4"> S & R Associates</h3>
+            <h3 className="font-serif text-2xl font-bold text-emerald mb-4">S R & Associates</h3>
             <p className="text-offwhite/70 leading-relaxed">
               Premium tax consultation and financial advisory services for discerning clients.
             </p>
@@ -47,7 +47,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-3 text-offwhite/70">
                 <Mail size={20} className="text-emerald mt-1 flex-shrink-0" />
-                <span>Coming Soon</span>
+                <span>sanjayrajak26@yahoo.com</span>
               </li>
               <li className="flex items-start gap-3 text-offwhite/70">
                 <Phone size={20} className="text-emerald mt-1 flex-shrink-0" />
@@ -88,7 +88,7 @@ export function Footer() {
 
         <div className="pt-8 border-t border-offwhite/10 text-center">
           <p className="text-offwhite/60 text-sm">
-            © 2024 Elite Tax Advisory. All rights reserved. | Privacy Policy | Terms of Service
+            © 2024 S R & Associates All rights reserved. | Privacy Policy | Terms of Service
           </p>
         </div>
       </div>

@@ -56,10 +56,8 @@ export default function BlogLayout({
       <body className="bg-charcoal text-offwhite antialiased">
         {/* Site Navigation */}
         <Nav />
-
         {/* Main Content */}
-        <main>{children}</main>
-
+        {children}
         {/* Footer */}
         <footer className="bg-charcoal">
           <Footer />

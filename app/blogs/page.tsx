@@ -8,18 +8,13 @@ export const metadata = {
 
 export default function BlogsPage() {
   const blogs = getAllBlogs();
-  console.log(blogs)
   const featuredBlog = blogs.find((b:any)=>b.meta.featured); // First blog as featured
 
   return (
-    <section className="py-2 pt-8 px-6 min-h-screen bg-emerald/10">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-emerald/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-emerald/3 rounded-full blur-3xl pointer-events-none" />
-      
+    <section className="py-2 pt-8 px-6 min-h-screen bg-emerald/10"> 
       <div className="max-w-7xl mx-auto relative">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center my-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald/90 bg-emerald/5 mb-6">
             <span className="text-sm text-emerald font-medium">Latest Insights</span>
           </div>

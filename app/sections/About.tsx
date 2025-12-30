@@ -5,9 +5,9 @@ import { Shield, Award, Users, TrendingUp } from 'lucide-react';
 import Image from 'next/image';
 
 const stats = [
-  { icon: Users, value: '500+', label: 'Happy Clients' },
+  { icon: Users, value: '1989+', label: 'Happy Clients' },
   { icon: Award, value: '15+', label: 'Years Experience' },
-  { icon: Shield, value: '99.8%', label: 'Success Rate' },
+  { icon: Shield, value: '100%', label: 'Success Rate' },
   { icon: TrendingUp, value: '₹50Cr+', label: 'Tax Saved' },
 ];
 

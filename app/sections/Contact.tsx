@@ -14,8 +14,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: '[email protected]',
-    link: 'mailto:[email protected]',
+    value: 'sanjayrajak26@yahoo.com',
+    link: 'mailto:sanjayrajak26@yahoo.com',
   },
   {
     icon: MapPin,
@@ -75,7 +75,7 @@ export default function ContactSection() {
     const emailBody = `Name: ${formData.name}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0A%0AMessage:%0A${formData.message}`;
     
     // Open email client
-    window.location.href = `mailto:[email protected]?subject=Tax Consultation Inquiry&body=${emailBody}`;
+    window.location.href = `mailto:sanjayrajak26@yahoo.com?subject=Tax Consultation Inquiry&body=${emailBody}`;
     
     // Reset form
     setTimeout(() => {
