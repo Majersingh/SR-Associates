@@ -7,6 +7,7 @@ import Modal from '../components/Addmodal'
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [showForm, setShowform] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     console.log(openModal)
     const navItems = [
@@ -22,10 +23,16 @@ export default function Navbar() {
         // this dectect if it auto pop afer landing of user then it take 1.5 sec to pop out else if its bt btn click te isnatlt pop out
         setTimeout(()=> setOpenModal(true),3000)
     },[])
+     
+    //open modal form
+    const handleModal=()=>{
+        setOpenModal(true); 
+        setShowform(true)
+    }
 
     return (
         <>
-            <Modal isOpen={openModal} onClosemodal={(state:boolean)=>setOpenModal(state)}/>
+            <Modal isOpen={openModal} showFormview={showForm} onClosemodal={(state:boolean)=>{setOpenModal(state); setShowform(false)}}/>
             <nav className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm border-b border-emerald/10">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="flex items-center justify-between h-20">
@@ -62,7 +69,7 @@ export default function Navbar() {
                             <motion.button
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                onClick={() => { setOpenModal(!openModal) }}
+                                onClick={handleModal}
                                 transition={{ delay: 0.6 }}
                                 className="px-6 py-2.5 bg-emerald text-black font-semibold rounded-lg hover:bg-emerald/90 transition-all duration-300 hover:shadow-lg hover:shadow-emerald/20"
                             >
@@ -107,7 +114,7 @@ export default function Navbar() {
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: 0.3 }}
-                                        onClick={() => setOpenModal(!openModal)}
+                                        onClick={handleModal}
                                         className="w-full px-6 py-2.5 bg-emerald text-black font-semibold rounded-lg hover:bg-emerald/90 transition-all duration-300"
                                     >
                                         Get Started

@@ -1,12 +1,13 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Phone, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react';
+import { X, Phone, CheckCircle2, Sparkles, ArrowRight, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 interface ConsultationModalProps {
-isOpen: boolean;
-onClosemodal: (state: boolean) => void; 
+  isOpen: boolean;
+  showFormview:boolean;
+  onClosemodal: (state: boolean) => void;
 }
 
 const services = [
@@ -19,9 +20,9 @@ const services = [
   'Others'
 ];
 
-export default function ConsultationModal({ isOpen, onClosemodal }: ConsultationModalProps) {
-  const [openModal , setOpenModal]=useState(false);
-  console.log("Event is to" , isOpen)
+export default function ConsultationModal({ isOpen, showFormview, onClosemodal }: ConsultationModalProps) {
+  const [openModal, setOpenModal] = useState(false);
+  const [showForm, setShowForm] = useState(false); // For mobile flip
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -30,11 +31,13 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  
-  const onClose=()=>{
+ console.log(showForm , openModal)
+  const onClose = () => {
     onClosemodal(false);
-    setOpenModal(false)
-  }
+    setOpenModal(false);
+    setShowForm(false);
+  };
+
   // Lock body scroll when modal is open
   useEffect(() => {
     if (openModal) {
@@ -47,13 +50,19 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
       document.body.style.overflow = 'unset';
     };
   }, [openModal]);
-  
+
+
   useEffect(()=>{
-        setOpenModal(isOpen)
-    return()=>{
-        setOpenModal(false)
-    }
-},[isOpen])
+    setShowForm(showFormview);
+  },[showFormview])
+
+  useEffect(() => {
+    setOpenModal(isOpen);
+    return () => {
+      setOpenModal(false);
+      setShowForm(false);
+    };
+  }, [isOpen]);
 
   const handleClose = () => {
     setIsSuccess(false);
@@ -70,7 +79,7 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
 
     // Format WhatsApp message
     const whatsappMessage = `*New Consultation Request*%0A%0A*Name:* ${formData.name}%0A*Email:* ${formData.email}%0A*Phone:* ${formData.phone}%0A*Service:* ${formData.service}`;
-    const whatsappNumber = '919250561216'; // Replace with your number
+    const whatsappNumber = '919250561216';
     
     // Open WhatsApp in new tab
     window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank');
@@ -112,22 +121,22 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+              onClick={(e) => e.stopPropagation()}
               className="relative w-full max-w-4xl bg-black border border-emerald/30 rounded-2xl shadow-2xl shadow-emerald/20 my-8"
             >
               {/* Close Button */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 backdrop-blur-sm border border-emerald/30 text-offwhite hover:bg-emerald/20 hover:border-emerald transition-all duration-300"
+                className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 backdrop-blur-sm border border-emerald/30 text-offwhite hover:bg-emerald/20 hover:border-emerald transition-all duration-300"
                 aria-label="Close modal"
               >
                 <X size={20} />
               </button>
 
-              <div className="grid md:grid-cols-2 max-h-[85vh] overflow-y-auto">
+              {/* Desktop Layout - Two Column */}
+              <div className="hidden md:grid md:grid-cols-2 max-h-[85vh] overflow-hidden">
                 {/* Left Side - Promotional Content */}
-                <div className="rounded-2xl relative bg-gradient-to-br from-emerald/20 to-emerald/5 p-8 md:p-10 overflow-hidden">
-                  {/* Background Pattern */}
+                <div className="relative bg-gradient-to-br from-emerald/20 to-emerald/5 p-8 md:p-10 overflow-hidden rounded-l-2xl">
                   <div className="absolute inset-0 opacity-10">
                     <div className="absolute top-0 left-0 w-64 h-64 bg-emerald rounded-full blur-3xl" />
                     <div className="absolute bottom-0 right-0 w-48 h-48 bg-emerald rounded-full blur-2xl" />
@@ -165,7 +174,6 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
                         SR& Associates is here to help you with expert tax and compliance solutions.
                       </motion.p>
 
-                      {/* Services List */}
                       <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -187,7 +195,6 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
                       </motion.div>
                     </div>
 
-                    {/* Trust Badges */}
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -210,8 +217,8 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
                   </div>
                 </div>
 
-                {/* Right Side - Form */}
-                <div className="px-8 py-1 md:px-10 overflow-y-auto max-h-[80vh]">
+                {/* Right Side - Form (Desktop) */}
+                <div className="px-8  py-2 md:px-10 overflow-y-auto max-h-[85vh]">
                   <AnimatePresence mode="wait">
                     {!isSuccess ? (
                       <motion.form
@@ -232,7 +239,6 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
                           </p>
                         </motion.div>
 
-                        {/* Full Name */}
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -253,7 +259,6 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
                           />
                         </motion.div>
 
-                        {/* Email */}
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -274,7 +279,6 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
                           />
                         </motion.div>
 
-                        {/* Phone */}
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -301,7 +305,6 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
                           </div>
                         </motion.div>
 
-                        {/* Service Needed */}
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -327,7 +330,6 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
                           </select>
                         </motion.div>
 
-                        {/* Submit Button */}
                         <motion.button
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -346,7 +348,6 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
                           )}
                         </motion.button>
 
-                        {/* Call Now Link */}
                         <motion.div
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
@@ -364,7 +365,6 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
                         </motion.div>
                       </motion.form>
                     ) : (
-                      // Success State
                       <motion.div
                         key="success"
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -393,6 +393,219 @@ export default function ConsultationModal({ isOpen, onClosemodal }: Consultation
                     )}
                   </AnimatePresence>
                 </div>
+              </div>
+
+              {/* Mobile Layout - Flip Card */}
+              <div className="md:hidden relative overflow-hidden rounded-2xl" style={{ minHeight: '500px' }}>
+                <AnimatePresence mode="wait">
+                  {!showForm ? (
+                    // Promotional Side (Mobile)
+                    <motion.div
+                      key="promo"
+                      initial={{ rotateY: 0 }}
+                      exit={{ rotateY: 90 }}
+                      transition={{ duration: 0.3 }}
+                      className="relative bg-gradient-to-br from-emerald/20 to-emerald/5 p-6 min-h-[500px] flex flex-col justify-between"
+                    >
+                      <div className="absolute inset-0 opacity-10">
+                        <div className="absolute top-0 left-0 w-48 h-48 bg-emerald rounded-full blur-3xl" />
+                        <div className="absolute bottom-0 right-0 w-32 h-32 bg-emerald rounded-full blur-2xl" />
+                      </div>
+
+                      <div className="relative z-10">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald/20 border border-emerald/40 mb-4">
+                          <Sparkles size={14} className="text-emerald" />
+                          <span className="text-xs text-emerald font-semibold">
+                            Limited Time Offer
+                          </span>
+                        </div>
+
+                        <h2 className="font-serif text-2xl font-bold text-offwhite mb-3 leading-tight">
+                          Get a <span className="text-emerald">Free Consultation</span> with our Experts!
+                        </h2>
+
+                        <p className="text-offwhite/70 mb-6 text-sm">
+                          S & R Associates is here to help you with expert tax and compliance solutions.
+                        </p>
+
+                        <div className="space-y-2 mb-6">
+                          {['Company Registration', 'GST Filing & Returns', 'Income Tax Services', 'Trademark & Compliance'].map((service, index) => (
+                            <div key={index} className="flex items-center gap-2">
+                              <CheckCircle2 size={16} className="text-emerald flex-shrink-0" />
+                              <span className="text-offwhite/80 text-sm">{service}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className="flex items-center gap-4 pb-4 border-b border-emerald/20 mb-6">
+                          <div className="text-center">
+                            <div className="text-xl font-bold text-emerald mb-1">500+</div>
+                            <div className="text-xs text-offwhite/60">Clients</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-xl font-bold text-emerald mb-1">15+</div>
+                            <div className="text-xs text-offwhite/60">Years</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-xl font-bold text-emerald mb-1">24hrs</div>
+                            <div className="text-xs text-offwhite/60">Response</div>
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={() => setShowForm(true)}
+                          className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-emerald hover:bg-emerald/90 text-black font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-emerald/30 group"
+                        >
+                          <span>Fill Form to Get Started</span>
+                          <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                        </button>
+
+                        <div className="text-center mt-4">
+                          <p className="text-offwhite/60 text-xs mb-2">Or Call Now:</p>
+                          <a
+                            href="tel:+919250561216"
+                            className="inline-flex items-center gap-2 text-emerald hover:text-emerald/80 font-semibold text-sm transition-colors"
+                          >
+                            <Phone size={14} />
+                            <span>+91 9250561216</span>
+                          </a>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    // Form Side (Mobile)
+                    <motion.div
+                      key="form-mobile"
+                      initial={{ rotateY: -90 }}
+                      animate={{ rotateY: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="p-6 min-h-[500px] overflow-y-auto"
+                    >
+                      {!isSuccess ? (
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                          <div className="flex items-center justify-between mb-4">
+                            <button
+                              type="button"
+                              onClick={() => setShowForm(false)}
+                              className="text-offwhite/60 pr-2 hover:text-emerald text-sm flex items-center gap-1"
+                            >
+                              ← Back
+                            </button>
+                          </div>
+
+                          <p className="text-offwhite/70 text-xs mb-4">
+                            We'll get back to you within <span className="text-emerald font-semibold">24 hours</span>.
+                          </p>
+
+                          <div>
+                            <label htmlFor="name-mobile" className="block text-offwhite font-medium mb-1.5 text-sm">
+                              Full Name *
+                            </label>
+                            <input
+                              type="text"
+                              id="name-mobile"
+                              name="name"
+                              value={formData.name}
+                              onChange={handleChange}
+                              required
+                              placeholder="Enter your full name"
+                              className="w-full px-4 py-2.5 bg-black/50 border border-emerald/20 rounded-lg text-offwhite placeholder:text-offwhite/40 focus:outline-none focus:border-emerald/60 focus:ring-2 focus:ring-emerald/20 transition-all text-sm"
+                            />
+                          </div>
+
+                          <div>
+                            <label htmlFor="email-mobile" className="block text-offwhite font-medium mb-1.5 text-sm">
+                              Email Address *
+                            </label>
+                            <input
+                              type="email"
+                              id="email-mobile"
+                              name="email"
+                              value={formData.email}
+                              onChange={handleChange}
+                              required
+                              placeholder="[email protected]"
+                              className="w-full px-4 py-2.5 bg-black/50 border border-emerald/20 rounded-lg text-offwhite placeholder:text-offwhite/40 focus:outline-none focus:border-emerald/60 focus:ring-2 focus:ring-emerald/20 transition-all text-sm"
+                            />
+                          </div>
+
+                          <div>
+                            <label htmlFor="phone-mobile" className="block text-offwhite font-medium mb-1.5 text-sm">
+                              Mobile Number *
+                            </label>
+                            <div className="flex gap-2">
+                              <div className="flex items-center gap-1 px-3 py-2.5 bg-black/50 border border-emerald/20 rounded-lg text-offwhite/60 text-xs">
+                                +91
+                              </div>
+                              <input
+                                type="tel"
+                                id="phone-mobile"
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                required
+                                pattern="[0-9]{10}"
+                                placeholder="9999999999"
+                                className="flex-1 px-4 py-2.5 bg-black/50 border border-emerald/20 rounded-lg text-offwhite placeholder:text-offwhite/40 focus:outline-none focus:border-emerald/60 focus:ring-2 focus:ring-emerald/20 transition-all text-sm"
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            <label htmlFor="service-mobile" className="block text-offwhite font-medium mb-1.5 text-sm">
+                              Service Needed *
+                            </label>
+                            <select
+                              id="service-mobile"
+                              name="service"
+                              value={formData.service}
+                              onChange={handleChange}
+                              required
+                              className="w-full px-4 py-2.5 bg-black/50 border border-emerald/20 rounded-lg text-offwhite focus:outline-none focus:border-emerald/60 focus:ring-2 focus:ring-emerald/20 transition-all appearance-none cursor-pointer text-sm"
+                            >
+                              <option value="" className="bg-black">Select a service</option>
+                              {services.map((service) => (
+                                <option key={service} value={service} className="bg-black">
+                                  {service}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          <button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-emerald hover:bg-emerald/90 text-black font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-emerald/30 disabled:opacity-50 disabled:cursor-not-allowed group mt-6"
+                          >
+                            {isSubmitting ? (
+                              <span>Processing...</span>
+                            ) : (
+                              <>
+                                <span>Request Callback</span>
+                                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                              </>
+                            )}
+                          </button>
+                        </form>
+                      ) : (
+                        <div className="flex flex-col items-center justify-center text-center py-12">
+                          <div className="w-16 h-16 rounded-full bg-emerald/20 flex items-center justify-center mb-4">
+                            <CheckCircle2 size={32} className="text-emerald" />
+                          </div>
+                          <h3 className="text-xl font-bold text-offwhite mb-2">
+                            Request Submitted!
+                          </h3>
+                          <p className="text-offwhite/70 text-sm mb-1">
+                            Thank you! We'll contact you within 24 hours.
+                          </p>
+                          <p className="text-xs text-offwhite/50">
+                            Check your WhatsApp for confirmation.
+                          </p>
+                        </div>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </motion.div>
           </div>
