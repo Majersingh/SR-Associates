@@ -15,7 +15,7 @@ const slides = [
   },
   {
     image:
-      'https://images.unsplash.com/photo-1523952578875-e6bb18b26645?auto=format&fit=crop&w=1600&q=80',
+      'https://img.freepik.com/premium-photo/high-angle-view-gst-text-with-coins-black-background_1048944-13699705.jpg?w=1480',
     title: 'GST Compliance',
     description: 'Complete GST solutions for businesses',
   },
@@ -199,14 +199,14 @@ export function Hero() {
                         className="object-cover"
                         priority
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
                       
                       <div className="absolute bottom-0 left-0 right-0 p-6">
                         <motion.h3
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.2 }}
-                          className="text-2xl font-bold text-offwhite mb-2"
+                          className="text-2xl font-bold text-charcoal mb-2"
                         >
                           {slides[currentSlide].title}
                         </motion.h3>
@@ -214,27 +214,27 @@ export function Hero() {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.3 }}
-                          className="text-offwhite/80 text-sm"
+                          className="text-charcoal/80 text-sm"
                         >
                           {slides[currentSlide].description}
                         </motion.p>
                       </div>
 
                       {/* Navigation Arrows - Mobile */}
-                      <button
+                      {/* <button
                         onClick={prevSlide}
-                        className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 backdrop-blur-sm border border-emerald/30 text-offwhite hover:bg-emerald/20 transition-all z-10"
+                        className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-charcoal/90 backdrop-blur-sm border border-emerald/30 text-offwhite hover:bg-emerald/20 transition-all z-10"
                         aria-label="Previous slide"
                       >
                         <ChevronLeft size={20} />
                       </button>
                       <button
                         onClick={nextSlide}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 backdrop-blur-sm border border-emerald/30 text-offwhite hover:bg-emerald/20 transition-all z-10"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-charcoal/60 backdrop-blur-sm border border-emerald/30 text-offwhite hover:bg-emerald/20 transition-all z-10"
                         aria-label="Next slide"
                       >
                         <ChevronRight size={20} />
-                      </button>
+                      </button> */}
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -289,7 +289,7 @@ export function Hero() {
                           fill
                           className="object-cover"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
                         
                         {isActive && (
                           <motion.div
@@ -297,10 +297,10 @@ export function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             className="absolute bottom-0 left-0 right-0 p-8 text-center"
                           >
-                            <h3 className="text-3xl font-bold text-offwhite mb-2">
+                            <h3 className="text-3xl font-bold text-charcoal mb-2">
                               {slide.title}
                             </h3>
-                            <p className="text-offwhite/70">{slide.description}</p>
+                            <p className="text-charcoal/70">{slide.description}</p>
                           </motion.div>
                         )}
                       </div>
