@@ -9,13 +9,13 @@ import { useState, useEffect } from 'react';
 const slides = [
   {
     image:
-      'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1600&q=80',
+      '/tax-plan.jpg',
     title: 'Income Tax Filing',
     description: 'Hassle-free ITR filing for individuals',
   },
   {
     image:
-      'https://img.freepik.com/premium-photo/high-angle-view-gst-text-with-coins-black-background_1048944-13699705.jpg?w=1480',
+      '/gst.jpg',
     title: 'GST Compliance',
     description: 'Complete GST solutions for businesses',
   },
